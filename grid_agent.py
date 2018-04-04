@@ -121,6 +121,10 @@ class DistributedAgent:
             print 'Error! ObsQuad:', quadrant, 'PosYX:', self.y, self.x
             raise EnvironmentError
 
+    def observe_nbors(self):
+        y1, x1, y2, x2, sensor_map = self.world_act.occ_map_view(self.y - 1, self.x - 1, 3, 3)
+        print y1,x1,y2,x2, sensor_map
+
     def broadcast_msg(self, message):
         # wh, ww = self.world_act.get_size()
         x1 = (self.x - COMM_RANGE)

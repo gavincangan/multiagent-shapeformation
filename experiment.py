@@ -26,7 +26,7 @@ class Experiment:
             random.shuffle(self.list_agents)
             for agent in self.list_agents:
                 agent.move(random.choice(agent.get_move_actions()))
-                agent.observe_quadrant(random.choice(agent.get_obs_actions()))
+                agent.observe_nbors()
                 agent.broadcast_msg(random.choice(agent.comm_actions))
                 self.vis.canvas.update()
                 self.vis.canvas.after(int((ts * 900) /nagents))
@@ -38,8 +38,13 @@ class Experiment:
 
 if __name__ == "__main__":
 
-    my_exp = Experiment( (10,10), 7, ((3,2),(1,6),(7,8),(2,6),(0,9),(5,6),(4,7)) )
-    my_exp.world.add_rocks( ( (1,1),(3,3),(1,3),(3,1),(2,0),(2,4) ) )
+    my_exp = Experiment( (10,10), 7, ((3,2),(1,6),(7,8),(2,6),(1,9),(5,6),(4,7)) )
+    my_exp.world.add_rocks( ( (1,1),(3,3),(1,3),(3,1),(2,4), \
+                              (0,0),(0,1),(0,2),(0,3),(0,4),(0,5),(0,6),(0,7),(0,8),(0,9), \
+                              (9,0),(9,1),(9,2),(9,3),(9,4),(9,5),(9,6),(9,7),(9,8),(9,9), \
+                              (1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0),(8,0), \
+                              (1,9),(2,9),(3,9),(4,9),(5,9),(6,9),(7,9),(8,9) \
+                            ) )
 
     # my_exp = Experiment( (5,5), 6, ((3,2),(1,2),(2,4),(0,4),(3,0),(4,4)) )
     # my_exp.world.add_rocks( ( (1,1),(3,3),(1,3),(3,1),(2,0),(2,4) ) )
